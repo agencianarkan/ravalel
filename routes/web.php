@@ -13,9 +13,9 @@ Route::get('/', function () {
 Route::prefix('plaza')->name('plaza.')->group(function () {
     // #region agent log
     try {
-        $logPath = base_path('.cursor/debug.log');
-        file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'E','location'=>'routes/web.php:13','message'=>'Plaza routes group entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-    } catch (\Exception $e) {}
+        $logPath = __DIR__ . '/../.cursor/debug.log';
+        @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'E','location'=>'routes/web.php:13','message'=>'Plaza routes group entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+    } catch (\Throwable $e) {}
     // #endregion
     
     // Login

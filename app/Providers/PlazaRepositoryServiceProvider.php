@@ -29,7 +29,7 @@ class PlazaRepositoryServiceProvider extends ServiceProvider
     {
         // #region agent log
         try {
-            $logPath = __DIR__ . '/../../.cursor/debug.log';
+            $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
             @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaRepositoryServiceProvider::register:28','message'=>'Service Provider register entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
         } catch (\Throwable $e) {}
         // #endregion
@@ -40,7 +40,7 @@ class PlazaRepositoryServiceProvider extends ServiceProvider
             
             // #region agent log
             try {
-                $logPath = __DIR__ . '/../../.cursor/debug.log';
+                $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
                 @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaRepositoryServiceProvider::register:35','message'=>'Registered PlazaUserRepository','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $e) {}
             // #endregion
@@ -55,14 +55,14 @@ class PlazaRepositoryServiceProvider extends ServiceProvider
             
             // #region agent log
             try {
-                $logPath = __DIR__ . '/../../.cursor/debug.log';
+                $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
                 @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaRepositoryServiceProvider::register:45','message'=>'All repositories registered','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $e) {}
             // #endregion
         } catch (\Exception $e) {
             // #region agent log
             try {
-                $logPath = __DIR__ . '/../../.cursor/debug.log';
+                $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
                 @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaRepositoryServiceProvider::register:50','message'=>'Service Provider registration error','data'=>['error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine(),'trace'=>$e->getTraceAsString()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $logErr) {}
             // #endregion

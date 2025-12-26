@@ -17,14 +17,14 @@ try {
     $app = require_once __DIR__.'/../bootstrap/app.php';
     
     // #region agent log
-    $logPath = __DIR__ . '/../.cursor/debug.log';
+    $logPath = __DIR__ . '/../storage/logs/plaza_debug.log';
     @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'E','location'=>'public/index.php:16','message'=>'Laravel app bootstrapped','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
     // #endregion
     
     $app->handleRequest(Request::capture());
 } catch (\Throwable $e) {
     // #region agent log
-    $logPath = __DIR__ . '/../.cursor/debug.log';
+    $logPath = __DIR__ . '/../storage/logs/plaza_debug.log';
     $errorData = [
         'sessionId' => 'debug-session',
         'runId' => 'run1',

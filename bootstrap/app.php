@@ -21,23 +21,25 @@ return Application::configure(basePath: dirname(__DIR__))
         // Capturar todas las excepciones para debugging
         $exceptions->render(function (\Throwable $e, \Illuminate\Http\Request $request) {
             // Escribir error a archivo de log
-            $logPath = __DIR__ . '/../.cursor/debug.log';
+            $logPath = __DIR__ . '/../storage/logs/plaza_debug.log';
             $errorData = [
                 'timestamp' => date('Y-m-d H:i:s'),
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString(),
-                'url' => $request->fullUrl(),
-                'method' => $request->method(),
+                'url' => $request->fullUrl() ?? 'N/A',
+                'method' => $request->method() ?? 'N/A',
             ];
             @file_put_contents($logPath, json_encode($errorData, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
             
-            // En desarrollo, mostrar el error
-            if (config('app.debug')) {
-                return null; // Dejar que Laravel muestre el error normalmente
-            }
-            
-            return null;
+            // SIEMPRE mostrar el error para debugging (temporal)
+            // TODO: Remover esto después de debuggear
+            return response()->json([
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => explode("\n", $e->getTraceAsString())
+            ], 500);
         });
     })->create();

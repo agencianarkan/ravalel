@@ -13,7 +13,31 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
 
     public function __construct()
     {
-        $this->initializeMockData();
+        // #region agent log
+        try {
+            $logPath = base_path('.cursor/debug.log');
+            file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:14','message'=>'Repository constructor entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+        } catch (\Exception $e) {}
+        // #endregion
+        
+        try {
+            $this->initializeMockData();
+            
+            // #region agent log
+            try {
+                $logPath = base_path('.cursor/debug.log');
+                file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:22','message'=>'Mock data initialized','data'=>['userCount'=>count($this->users)],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+            } catch (\Exception $e) {}
+            // #endregion
+        } catch (\Exception $e) {
+            // #region agent log
+            try {
+                $logPath = base_path('.cursor/debug.log');
+                file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:28','message'=>'Mock data initialization error','data'=>['error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+            } catch (\Exception $logErr) {}
+            // #endregion
+            throw $e;
+        }
     }
 
     private function initializeMockData(): void

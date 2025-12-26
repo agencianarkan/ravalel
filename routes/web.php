@@ -11,6 +11,13 @@ Route::get('/', function () {
 
 // Rutas de autenticación Plaza
 Route::prefix('plaza')->name('plaza.')->group(function () {
+    // #region agent log
+    try {
+        $logPath = base_path('.cursor/debug.log');
+        file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'E','location'=>'routes/web.php:13','message'=>'Plaza routes group entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+    } catch (\Exception $e) {}
+    // #endregion
+    
     // Login
     Route::get('/login', [PlazaAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [PlazaAuthController::class, 'login'])->middleware('plaza.brute-force');

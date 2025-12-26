@@ -42,15 +42,34 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
 
     private function initializeMockData(): void
     {
-        // Usuario 1: Owner activo
-        $this->users[1] = new PlazaUser(
-            id: 1,
-            email: 'owner@example.com',
-            passwordHash: Hash::make('password123'),
-            fullName: 'Juan Pérez',
-            status: 'active',
-            createdAt: new \DateTime('2024-01-01 10:00:00')
-        );
+        try {
+            // Usuario 1: Owner activo
+            $this->users[1] = new PlazaUser(
+                id: 1,
+                email: 'owner@example.com',
+                passwordHash: Hash::make('password123'),
+                fullName: 'Juan Pérez',
+                status: 'active',
+                createdAt: new \DateTime('2024-01-01 10:00:00')
+            );
+        } catch (\Throwable $e) {
+            // Si hay error, intentar sin named arguments (compatibilidad)
+            $this->users[1] = new PlazaUser(
+                1,
+                'owner@example.com',
+                Hash::make('password123'),
+                'Juan Pérez',
+                'active',
+                null,
+                null,
+                null,
+                new \DateTime('2024-01-01 10:00:00'),
+                0,
+                null,
+                null,
+                new \DateTime('2024-01-01 10:00:00')
+            );
+        }
 
         // Usuario 2: Shop Manager activo
         $this->users[2] = new PlazaUser(

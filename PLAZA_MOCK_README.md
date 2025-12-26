@@ -33,9 +33,14 @@ El sistema viene con 5 usuarios de prueba ya configurados:
 
 ## 🔐 Rutas Disponibles
 
+### URLs de Producción
+
+Base URL: `https://laravel.narkan.cl/public/`
+
 ### Autenticación
 
 - `GET /plaza/login` - Formulario de login
+  - URL completa: `https://laravel.narkan.cl/public/plaza/login`
 - `POST /plaza/login` - Procesar login
 - `POST /plaza/logout` - Cerrar sesión
 - `GET /plaza/forgot-password` - Solicitar reset de contraseña
@@ -46,8 +51,10 @@ El sistema viene con 5 usuarios de prueba ya configurados:
 ### Dashboard y Tiendas
 
 - `GET /plaza/stores/select` - Seleccionar tienda (después de login)
+  - URL completa: `https://laravel.narkan.cl/public/plaza/stores/select`
 - `POST /plaza/stores/{storeId}/set-active` - Establecer tienda activa
 - `GET /plaza/dashboard` - Dashboard principal (requiere tienda seleccionada)
+  - URL completa: `https://laravel.narkan.cl/public/plaza/dashboard`
 
 ### Pruebas de Permisos
 
@@ -60,17 +67,28 @@ El sistema viene con 5 usuarios de prueba ya configurados:
 
 ### 1. Login y Selección de Tienda
 
-```bash
-# 1. Login
-POST /plaza/login
-{
-  "email": "editor@example.com",
-  "password": "password123"
-}
-
-# 2. Seleccionar tienda
-POST /plaza/stores/1/set-active
+**Paso 1:** Accede al login
 ```
+https://laravel.narkan.cl/public/plaza/login
+```
+
+**Paso 2:** Ingresa credenciales
+- Email: `editor@example.com`
+- Contraseña: `password123`
+
+**Paso 3:** Selecciona una tienda de la lista
+
+**Paso 4:** Accede al dashboard
+```
+https://laravel.narkan.cl/public/plaza/dashboard
+```
+
+### 2. Prueba Rápida (Navegador)
+
+1. Ve a: `https://laravel.narkan.cl/public/plaza/login`
+2. Usa: `owner@example.com` / `password123`
+3. Selecciona una tienda
+4. Verás el dashboard con todos tus permisos
 
 ### 2. Probar Permisos
 

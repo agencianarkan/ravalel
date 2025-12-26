@@ -16,24 +16,22 @@ class PlazaAuthController extends Controller
     ) {
         // #region agent log
         try {
-            $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-            if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:13','message'=>'Controller constructor entry','data'=>['class'=>'PlazaAuthController'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+            $logPath = __DIR__ . '/../../../.cursor/debug.log';
+            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:13','message'=>'Controller constructor entry','data'=>['class'=>'PlazaAuthController'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
         } catch (\Throwable $e) {}
         // #endregion
         
         // #region agent log
         try {
-            $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-            if ($logPath) {
-                $authServiceClass = get_class($this->authService);
-                $contextServiceClass = get_class($this->contextService);
-                @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:20','message'=>'Services injected','data'=>['authService'=>$authServiceClass,'contextService'=>$contextServiceClass],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-            }
+            $logPath = __DIR__ . '/../../../.cursor/debug.log';
+            $authServiceClass = get_class($this->authService);
+            $contextServiceClass = get_class($this->contextService);
+            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:20','message'=>'Services injected','data'=>['authService'=>$authServiceClass,'contextService'=>$contextServiceClass],'timestamp'=>time()*1000])."\n", FILE_APPEND);
         } catch (\Throwable $e) {
             // #region agent log
             try {
-                $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-                if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:24','message'=>'Service injection error','data'=>['error'=>$e->getMessage(),'trace'=>$e->getTraceAsString()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+                $logPath = __DIR__ . '/../../../.cursor/debug.log';
+                @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthController::__construct:24','message'=>'Service injection error','data'=>['error'=>$e->getMessage(),'trace'=>$e->getTraceAsString()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $logErr) {}
             // #endregion
         }
@@ -47,15 +45,15 @@ class PlazaAuthController extends Controller
     {
         // #region agent log
         try {
-            $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-            if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'A','location'=>'PlazaAuthController::showLoginForm:22','message'=>'Controller entry','data'=>['method'=>'showLoginForm'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+            $logPath = __DIR__ . '/../../../.cursor/debug.log';
+            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'A','location'=>'PlazaAuthController::showLoginForm:22','message'=>'Controller entry','data'=>['method'=>'showLoginForm'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
         } catch (\Throwable $e) {}
         // #endregion
         
         // #region agent log
         try {
-            $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-            if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:26','message'=>'Before view load','data'=>['view'=>'plaza.auth.login'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+            $logPath = __DIR__ . '/../../../.cursor/debug.log';
+            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:26','message'=>'Before view load','data'=>['view'=>'plaza.auth.login'],'timestamp'=>time()*1000])."\n", FILE_APPEND);
         } catch (\Throwable $e) {}
         // #endregion
         
@@ -64,8 +62,8 @@ class PlazaAuthController extends Controller
             
             // #region agent log
             try {
-                $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-                if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:35','message'=>'View loaded successfully','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+                $logPath = __DIR__ . '/../../../.cursor/debug.log';
+                @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:35','message'=>'View loaded successfully','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $e) {}
             // #endregion
             
@@ -73,8 +71,8 @@ class PlazaAuthController extends Controller
         } catch (\Exception $e) {
             // #region agent log
             try {
-                $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : (defined('BASE_PATH') ? BASE_PATH . '/.cursor/debug.log' : null);
-                if ($logPath) @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:42','message'=>'View load error','data'=>['error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
+                $logPath = __DIR__ . '/../../../.cursor/debug.log';
+                @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'C','location'=>'PlazaAuthController::showLoginForm:42','message'=>'View load error','data'=>['error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
             } catch (\Throwable $logErr) {}
             // #endregion
             throw $e;

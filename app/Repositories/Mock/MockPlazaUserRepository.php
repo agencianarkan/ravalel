@@ -15,9 +15,9 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
     {
         // #region agent log
         try {
-            $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : __DIR__ . '/../../../.cursor/debug.log';
+            $logPath = __DIR__ . '/../../../.cursor/debug.log';
             @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:14','message'=>'Repository constructor entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-        } catch (\Exception $e) {}
+        } catch (\Throwable $e) {}
         // #endregion
         
         try {
@@ -25,16 +25,16 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
             
             // #region agent log
             try {
-                $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : __DIR__ . '/../../../.cursor/debug.log';
+                $logPath = __DIR__ . '/../../../.cursor/debug.log';
                 @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:22','message'=>'Mock data initialized','data'=>['userCount'=>count($this->users)],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-            } catch (\Exception $e) {}
+            } catch (\Throwable $e) {}
             // #endregion
         } catch (\Exception $e) {
             // #region agent log
             try {
-                $logPath = function_exists('base_path') ? base_path('.cursor/debug.log') : __DIR__ . '/../../../.cursor/debug.log';
+                $logPath = __DIR__ . '/../../../.cursor/debug.log';
                 @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'D','location'=>'MockPlazaUserRepository::__construct:28','message'=>'Mock data initialization error','data'=>['error'=>$e->getMessage(),'file'=>$e->getFile(),'line'=>$e->getLine()],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-            } catch (\Exception $logErr) {}
+            } catch (\Throwable $logErr) {}
             // #endregion
             throw $e;
         }

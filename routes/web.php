@@ -11,7 +11,56 @@ Route::get('/', function () {
 
 // Redirecciones de rutas comunes sin prefijo plaza
 Route::get('/login', function () {
-    return redirect()->route('plaza.login');
+    // #region agent log
+    $logPath = base_path('.cursor/debug.log');
+    $logData = json_encode([
+        'sessionId' => 'debug-session',
+        'runId' => 'run1',
+        'hypothesisId' => 'B',
+        'location' => 'routes/web.php:13',
+        'message' => 'Login redirect route executed',
+        'data' => ['uri' => request()->path()],
+        'timestamp' => (int)(microtime(true) * 1000)
+    ]) . "\n";
+    file_put_contents($logPath, $logData, FILE_APPEND);
+    // #endregion
+    
+    try {
+        $redirect = redirect()->route('plaza.login');
+        
+        // #region agent log
+        $logData2 = json_encode([
+            'sessionId' => 'debug-session',
+            'runId' => 'run1',
+            'hypothesisId' => 'C',
+            'location' => 'routes/web.php:25',
+            'message' => 'Redirect created successfully',
+            'data' => ['target_url' => $redirect->getTargetUrl()],
+            'timestamp' => (int)(microtime(true) * 1000)
+        ]) . "\n";
+        file_put_contents($logPath, $logData2, FILE_APPEND);
+        // #endregion
+        
+        return $redirect;
+    } catch (\Exception $e) {
+        // #region agent log
+        $logData3 = json_encode([
+            'sessionId' => 'debug-session',
+            'runId' => 'run1',
+            'hypothesisId' => 'C',
+            'location' => 'routes/web.php:35',
+            'message' => 'Redirect failed with exception',
+            'data' => [
+                'error' => $e->getMessage(),
+                'route_name' => 'plaza.login'
+            ],
+            'timestamp' => (int)(microtime(true) * 1000)
+        ]) . "\n";
+        file_put_contents($logPath, $logData3, FILE_APPEND);
+        // #endregion
+        
+        throw $e;
+    }
 });
 
 Route::get('/dashboard', function () {
@@ -25,8 +74,35 @@ Route::get('/forgot-password', function () {
 // Rutas de autenticación Plaza
 Route::prefix('plaza')->name('plaza.')->group(function () {
     
+    // #region agent log
+    $logPath = base_path('.cursor/debug.log');
+    $logData = json_encode([
+        'sessionId' => 'debug-session',
+        'runId' => 'run1',
+        'hypothesisId' => 'B',
+        'location' => 'routes/web.php:45',
+        'message' => 'Plaza routes group registering',
+        'data' => [],
+        'timestamp' => (int)(microtime(true) * 1000)
+    ]) . "\n";
+    file_put_contents($logPath, $logData, FILE_APPEND);
+    // #endregion
+    
     // Login
     Route::get('/login', [PlazaAuthController::class, 'showLoginForm'])->name('login');
+    
+    // #region agent log
+    $logData2 = json_encode([
+        'sessionId' => 'debug-session',
+        'runId' => 'run1',
+        'hypothesisId' => 'B',
+        'location' => 'routes/web.php:52',
+        'message' => 'Plaza login route registered',
+        'data' => ['route_name' => 'plaza.login'],
+        'timestamp' => (int)(microtime(true) * 1000)
+    ]) . "\n";
+    file_put_contents($logPath, $logData2, FILE_APPEND);
+    // #endregion
     Route::post('/login', [PlazaAuthController::class, 'login'])->middleware('plaza.brute-force');
     
     // Logout

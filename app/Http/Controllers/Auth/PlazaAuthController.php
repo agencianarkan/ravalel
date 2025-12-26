@@ -21,6 +21,20 @@ class PlazaAuthController extends Controller
      */
     public function showLoginForm()
     {
+        // #region agent log
+        $logPath = base_path('.cursor/debug.log');
+        $logData = json_encode([
+            'sessionId' => 'debug-session',
+            'runId' => 'run1',
+            'hypothesisId' => 'B',
+            'location' => 'PlazaAuthController.php:25',
+            'message' => 'showLoginForm called',
+            'data' => ['uri' => request()->path()],
+            'timestamp' => (int)(microtime(true) * 1000)
+        ]) . "\n";
+        file_put_contents($logPath, $logData, FILE_APPEND);
+        // #endregion
+        
         return view('plaza.auth.login');
     }
 

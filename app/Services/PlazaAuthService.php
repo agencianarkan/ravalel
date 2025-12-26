@@ -19,12 +19,6 @@ class PlazaAuthService
         private PlazaUserRepositoryInterface $userRepository,
         private PlazaAuthAuditRepositoryInterface $auditRepository
     ) {
-        // #region agent log
-        try {
-            $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
-            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaAuthService::__construct:18','message'=>'PlazaAuthService constructor entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-        } catch (\Throwable $e) {}
-        // #endregion
     }
 
     /**

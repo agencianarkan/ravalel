@@ -17,12 +17,6 @@ class PlazaPermissionService
         private PlazaCustomOverrideRepositoryInterface $customOverrideRepository,
         private PlazaCapabilityRepositoryInterface $capabilityRepository
     ) {
-        // #region agent log
-        try {
-            $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
-            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaPermissionService::__construct:12','message'=>'PlazaPermissionService constructor entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-        } catch (\Throwable $e) {}
-        // #endregion
     }
 
     /**

@@ -17,12 +17,6 @@ class PlazaContextService
         private PlazaStoreRepositoryInterface $storeRepository,
         private PlazaMembershipRepositoryInterface $membershipRepository
     ) {
-        // #region agent log
-        try {
-            $logPath = __DIR__ . '/../../storage/logs/plaza_debug.log';
-            @file_put_contents($logPath, json_encode(['sessionId'=>'debug-session','runId'=>'run1','hypothesisId'=>'B','location'=>'PlazaContextService::__construct:12','message'=>'PlazaContextService constructor entry','data'=>[],'timestamp'=>time()*1000])."\n", FILE_APPEND);
-        } catch (\Throwable $e) {}
-        // #endregion
     }
 
     /**

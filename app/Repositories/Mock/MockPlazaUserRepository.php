@@ -4,7 +4,6 @@ namespace App\Repositories\Mock;
 
 use App\Data\PlazaUser;
 use App\Repositories\Contracts\PlazaUserRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
 
 class MockPlazaUserRepository implements PlazaUserRepositoryInterface
 {
@@ -47,7 +46,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
             $this->users[1] = new PlazaUser(
                 id: 1,
                 email: 'owner@example.com',
-                passwordHash: Hash::make('password123'),
+                passwordHash: password_hash('password123', PASSWORD_BCRYPT),
                 fullName: 'Juan Pérez',
                 status: 'active',
                 createdAt: new \DateTime('2024-01-01 10:00:00')
@@ -57,7 +56,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
             $this->users[1] = new PlazaUser(
                 1,
                 'owner@example.com',
-                Hash::make('password123'),
+                password_hash('password123', PASSWORD_BCRYPT),
                 'Juan Pérez',
                 'active',
                 null,
@@ -75,7 +74,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
         $this->users[2] = new PlazaUser(
             id: 2,
             email: 'manager@example.com',
-            passwordHash: Hash::make('password123'),
+            passwordHash: password_hash('password123', PASSWORD_BCRYPT),
             fullName: 'María González',
             status: 'active',
             createdAt: new \DateTime('2024-01-02 10:00:00')
@@ -85,7 +84,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
         $this->users[3] = new PlazaUser(
             id: 3,
             email: 'logistics@example.com',
-            passwordHash: Hash::make('password123'),
+            passwordHash: password_hash('password123', PASSWORD_BCRYPT),
             fullName: 'Carlos Rodríguez',
             status: 'active',
             createdAt: new \DateTime('2024-01-03 10:00:00')
@@ -95,7 +94,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
         $this->users[4] = new PlazaUser(
             id: 4,
             email: 'editor@example.com',
-            passwordHash: Hash::make('password123'),
+            passwordHash: password_hash('password123', PASSWORD_BCRYPT),
             fullName: 'Ana Martínez',
             status: 'active',
             createdAt: new \DateTime('2024-01-04 10:00:00')
@@ -105,7 +104,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
         $this->users[5] = new PlazaUser(
             id: 5,
             email: 'pending@example.com',
-            passwordHash: Hash::make('password123'),
+            passwordHash: password_hash('password123', PASSWORD_BCRYPT),
             fullName: 'Pedro Sánchez',
             status: 'pending',
             verificationToken: 'token_pending_123',
@@ -136,7 +135,7 @@ class MockPlazaUserRepository implements PlazaUserRepositoryInterface
         $user = new PlazaUser(
             id: $this->nextId++,
             email: $data['email'],
-            passwordHash: $data['password_hash'] ?? Hash::make($data['password'] ?? ''),
+            passwordHash: $data['password_hash'] ?? password_hash($data['password'] ?? '', PASSWORD_BCRYPT),
             fullName: $data['full_name'] ?? null,
             status: $data['status'] ?? 'pending',
             verificationToken: $data['verification_token'] ?? null,

@@ -16,8 +16,13 @@ class PlazaUser
         public readonly int $failedLoginAttempts = 0,
         public readonly ?\DateTime $lockoutUntil = null,
         public readonly ?\DateTime $lastLoginAt = null,
-        public readonly \DateTime $createdAt = new \DateTime()
+        public readonly ?\DateTime $createdAt = null
     ) {}
+    
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt ?? new \DateTime();
+    }
 
     public function isActive(): bool
     {

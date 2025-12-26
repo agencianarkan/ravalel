@@ -11,7 +11,12 @@ class PlazaStore
         public readonly ?string $apiKey = null,
         public readonly ?int $ownerId = null,
         public readonly ?string $logoUrl = null,
-        public readonly \DateTime $createdAt = new \DateTime()
+        public readonly ?\DateTime $createdAt = null
     ) {}
+    
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt ?? new \DateTime();
+    }
 }
 

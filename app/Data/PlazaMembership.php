@@ -11,7 +11,12 @@ class PlazaMembership
         public readonly int $roleId,
         public readonly bool $isCustomMode = false,
         public readonly ?int $invitedBy = null,
-        public readonly \DateTime $createdAt = new \DateTime()
+        public readonly ?\DateTime $createdAt = null
     ) {}
+    
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt ?? new \DateTime();
+    }
 }
 

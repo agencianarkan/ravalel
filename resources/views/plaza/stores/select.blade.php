@@ -49,7 +49,7 @@
                                     <p class="text-gray-600 text-sm mb-2">{{ $store->domainUrl }}</p>
                                     <p class="text-xs text-gray-500">
                                         @php
-                                            $date = $store->createdAt instanceof \DateTime ? $store->createdAt : new \DateTime($store->createdAt);
+                                            $date = $store->createdAt ?? new \DateTime();
                                         @endphp
                                         Creada: {{ $date->format('d/m/Y') }}
                                     </p>

@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'plaza.store' => \App\Http\Middleware\EnsureStoreContext::class,
+            'plaza.permission' => \App\Http\Middleware\CheckPlazaPermission::class,
+            'plaza.brute-force' => \App\Http\Middleware\PlazaBruteForceProtection::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

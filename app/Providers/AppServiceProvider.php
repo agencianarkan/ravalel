@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Cargar helpers de Plaza
+        require_once app_path('Helpers/PlazaHelper.php');
     }
 }

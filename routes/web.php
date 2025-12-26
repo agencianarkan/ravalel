@@ -9,6 +9,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Redirecciones de rutas comunes sin prefijo plaza
+Route::get('/login', function () {
+    return redirect()->route('plaza.login');
+});
+
+Route::get('/dashboard', function () {
+    return redirect()->route('plaza.dashboard');
+});
+
+Route::get('/forgot-password', function () {
+    return redirect()->route('plaza.password.request');
+});
+
 // Rutas de autenticación Plaza
 Route::prefix('plaza')->name('plaza.')->group(function () {
     

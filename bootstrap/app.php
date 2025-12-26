@@ -34,12 +34,25 @@ return Application::configure(basePath: dirname(__DIR__))
             @file_put_contents($logPath, json_encode($errorData, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
             
             // SIEMPRE mostrar el error para debugging (temporal)
-            // TODO: Remover esto después de debuggear
             return response()->json([
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
                 'trace' => explode("\n", $e->getTraceAsString())
             ], 500);
+        });
+        
+        // También capturar excepciones no renderizadas
+        $exceptions->report(function (\Throwable $e) {
+            $logPath = __DIR__ . '/../storage/logs/plaza_debug.log';
+            $errorData = [
+                'timestamp' => date('Y-m-d H:i:s'),
+                'type' => 'report',
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ];
+            @file_put_contents($logPath, json_encode($errorData, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
         });
     })->create();
